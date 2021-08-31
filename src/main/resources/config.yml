@@ -1,0 +1,14 @@
+# Global Configuration
+
+# Tax Module
+tax:
+  enabled: true # If this is disabled, users will not be allowed to claim tax
+  max-tax-rate: 50 # A mine can't have more than 50% tax
+  min-tax-rate: 0 # Minimum tax rate for a mine
+
+# Global Tax Module
+# This is a tax rate that is applied to every mine
+global-tax:
+  enabled: true
+  rate: 5.0
+  method: OVERRIDE
