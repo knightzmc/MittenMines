@@ -2,6 +2,7 @@ package me.bristermitten.mittenmines
 
 import me.bristermitten.mittenmines.compat.CompatModule
 import me.bristermitten.mittenmines.config.ConfigModule
+import me.bristermitten.mittenmines.config.GlobalConfig
 import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.module.ModuleManager
 import me.bristermitten.mittenmines.serialization.SerializationModule
@@ -11,7 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class MittenMines : JavaPlugin() {
     private val configs = setOf(
-        LangConfig.CONFIG
+        LangConfig.CONFIG,
+        GlobalConfig.CONFIG
     )
 
     private val modules = setOf(
