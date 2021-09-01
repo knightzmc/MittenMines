@@ -1,4 +1,4 @@
-package me.bristermitten.mittenmines.modernworldedit
+package me.bristermitten.mittenmines.legacyworldedit
 
 import com.sk89q.worldedit.Vector
 import me.bristermitten.mittenmines.entity.BlockPoint

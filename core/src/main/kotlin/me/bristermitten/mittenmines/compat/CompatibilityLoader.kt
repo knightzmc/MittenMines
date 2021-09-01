@@ -1,7 +1,7 @@
 package me.bristermitten.mittenmines.compat
 
 import me.bristermitten.mittenmines.compat.vanilla.VanillaCompat
-import me.bristermitten.mittenmines.modernworldedit.LegacyWorldEditCompat
+import me.bristermitten.mittenmines.legacyworldedit.LegacyWorldEditCompat
 import me.bristermitten.mittenmines.modernworldedit.ModernWorldEditCompat
 import org.bukkit.Bukkit
 import javax.inject.Provider

@@ -18,8 +18,8 @@ object ModernRegionSelection : RegionSelection {
             val weRegion = CuboidRegion.makeCuboid(selection)
             Region.of(
                 weRegion.world?.name ?: player.world.name,
-                weRegion.minimumPoint.toMinesBlockPoint(),
-                weRegion.maximumPoint.toMinesBlockPoint(),
+                weRegion.minimumPoint.toMineBlockPoint(),
+                weRegion.maximumPoint.toMineBlockPoint(),
             )
         } catch (e: IncompleteRegionException) {
             null

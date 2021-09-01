@@ -29,9 +29,15 @@ dependencies {
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
 }
 
+
 tasks {
     test {
         useJUnitPlatform()
+    }
+
+    register<Copy>("copyJarToServerPlugins") {
+        from(getByPath("shadowJar"))
+        into(layout.projectDirectory.dir("../server/plugins"))
     }
 
     compileJava {
@@ -40,13 +46,13 @@ tasks {
     }
 
     shadowJar {
-        minimize()
-        listOf(
-            "com.google.inject",
-            "co.aikar.commands",
-            "co.aikar.locales"
-        ).forEach {
-            relocate(it, "me.bristermitten.mittenmines.libs.$it")
-        }
+//        minimize()
+//        listOf(
+//            "com.google.inject",
+//            "co.aikar.commands",
+//            "co.aikar.locales"
+//        ).forEach {
+//            relocate(it, "me.bristermitten.mittenmines.libs.$it")
+//        }
     }
 }

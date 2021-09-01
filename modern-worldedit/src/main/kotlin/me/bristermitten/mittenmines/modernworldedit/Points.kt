@@ -8,4 +8,4 @@ import me.bristermitten.mittenmines.entity.WorldPoint
 fun WorldPoint.toVector(): BlockVector3 = BlockVector3.at(this.x, this.y, this.z)
 fun BlockPoint.toVector(): BlockVector3 = BlockVector3.at(this.x, this.y, this.z)
 
-fun BlockVector3.toMinesBlockPoint() = BlockPoint(this.blockX, this.blockY, this.blockZ)
+fun BlockVector3.toMineBlockPoint() = BlockPoint(blockX, blockY, blockZ)

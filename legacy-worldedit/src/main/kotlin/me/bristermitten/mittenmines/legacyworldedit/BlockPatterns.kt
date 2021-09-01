@@ -1,4 +1,4 @@
-package me.bristermitten.mittenmines.modernworldedit
+package me.bristermitten.mittenmines.legacyworldedit
 
 import com.sk89q.worldedit.blocks.BaseBlock
 import com.sk89q.worldedit.function.pattern.Pattern
