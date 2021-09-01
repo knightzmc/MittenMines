@@ -1,1 +1,3 @@
 prefix: '<gray><bold>[<purple>MittenMines</purple>]</gray>'
+errors:
+  unknown-player: '<red>Unknown player {value}'
