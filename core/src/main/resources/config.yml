@@ -15,4 +15,8 @@ tax:
 global-tax:
   enabled: true
   rate: 5.0
+  # How the global tax rate should combine with mine-specific tax, if applicable
+  # COMBINE - Combine the global tax rate and the mine's tax rate
+  # OVERRIDE - The mine's tax rate overrides the global tax rate
+  # IGNORE - The global tax rate overrides the mine's tax rate
   method: OVERRIDE
