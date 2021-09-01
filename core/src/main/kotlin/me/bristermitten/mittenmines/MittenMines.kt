@@ -1,5 +1,6 @@
 package me.bristermitten.mittenmines
 
+import me.bristermitten.mittenmines.compat.CompatModule
 import me.bristermitten.mittenmines.config.ConfigModule
 import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.module.ModuleManager
@@ -12,11 +13,13 @@ class MittenMines : JavaPlugin() {
     private val configs = setOf(
         LangConfig.CONFIG
     )
+
     private val modules = setOf(
         TaxModule,
         GlobalTaxModule,
         SerializationModule,
-        ConfigModule(configs)
+        ConfigModule(configs),
+        CompatModule
     )
 
     override fun onEnable() {

@@ -1,6 +1,7 @@
-package me.bristermitten.mittenmines.compat
+package me.bristermitten.mittenmines.compat.vanilla
 
 import me.bristermitten.mittenmines.block.BlockPattern
+import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.entity.WorldPoint
 
 object BukkitBlockPlacer : BlockPlacer {
