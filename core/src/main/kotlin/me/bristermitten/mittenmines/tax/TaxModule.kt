@@ -13,7 +13,7 @@ object TaxModule : MinesModule, KotlinModule() {
 
     override fun configure() {
         KotlinMultibinder.newSetBinder<EventListener>(binder()).let { multibinder ->
-//            multibinder.addBinding().to<>()
+//            TODO
         }
     }
 

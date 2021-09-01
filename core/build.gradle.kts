@@ -42,7 +42,7 @@ tasks {
     shadowJar {
         minimize()
         listOf(
-            "com.google",
+            "com.google.inject",
             "co.aikar.commands",
             "co.aikar.locales"
         ).forEach {
