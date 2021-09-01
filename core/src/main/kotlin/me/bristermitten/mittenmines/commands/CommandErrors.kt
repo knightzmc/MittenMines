@@ -14,7 +14,7 @@ class CommandErrors @Inject constructor(private val langService: LangService) {
         replacements: Map<String, Any> = emptyMap(),
         message: (LangConfig) -> LangElement,
     ): Nothing {
-        langService.send(bukkitCommandExecutionContext.sender, message, replacements)
+        langService.send(bukkitCommandExecutionContext.sender, replacements, message)
         throw InvalidCommandArgument(false)
     }
 }
