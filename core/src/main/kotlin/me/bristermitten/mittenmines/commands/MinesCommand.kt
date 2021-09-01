@@ -9,6 +9,7 @@ import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.compat.RegionSelection
 import me.bristermitten.mittenmines.entity.Mine
 import me.bristermitten.mittenmines.entity.ServerOwner
+import me.bristermitten.mittenmines.entity.toAngledWorldPoint
 import me.bristermitten.mittenmines.entity.toWorldPoint
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -29,7 +30,7 @@ class MinesCommand @Inject constructor(
             return
         }
 
-        val mine = Mine(UUID.randomUUID(), ServerOwner, null, selection, player.location.toWorldPoint())
+        val mine = Mine(UUID.randomUUID(), ServerOwner, null, selection, player.location.toAngledWorldPoint())
         blockPlacer.setRegion(ConstantBlockPattern(blockDataFactory.createBlockData(Material.COAL_ORE)), mine.region)
         player.teleport(mine.spawnLocation.toLocation())
     }
