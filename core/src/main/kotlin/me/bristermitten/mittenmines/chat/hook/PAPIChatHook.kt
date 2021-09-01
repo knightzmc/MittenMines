@@ -1,10 +1,10 @@
 package me.bristermitten.mittenmines.chat.hook
 
 import me.clip.placeholderapi.PlaceholderAPI
-import org.bukkit.OfflinePlayer
+import org.bukkit.Bukkit
 
-class PAPIChatHook : ChatHook {
-    override fun format(message: String, player: OfflinePlayer?): String {
-        return PlaceholderAPI.setPlaceholders(player, message)
-    }
-}
+val PAPIChatHook = ConditionalHook({
+    Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")
+}, { message, player ->
+    PlaceholderAPI.setPlaceholders(player, message)
+})

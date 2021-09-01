@@ -11,7 +11,7 @@ class ChatModule : KotlinModule() {
         bind<ChatFormatter>().to<MiniMessageFormatter>()
 
         val multibinder = KotlinMultibinder.newSetBinder<ChatHook>(binder())
-        multibinder.addBinding().to<PAPIChatHook>()
+        multibinder.addBinding().toInstance(PAPIChatHook)
         multibinder.addBinding().to<HexColorFixerHook>()
     }
 }
