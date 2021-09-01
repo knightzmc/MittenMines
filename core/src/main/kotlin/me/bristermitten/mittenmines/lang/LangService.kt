@@ -42,17 +42,17 @@ class LangService @Inject constructor(
 
     fun sendMessage(
         receiver: CommandSender,
-        message: (LangConfig) -> String,
         placeholders: Map<String, Any> = emptyMap(),
+        message: (LangConfig) -> String,
     ) {
         val toLangElement = { s: String -> LangElement(s, null, null, null, null) }
-        send(receiver, message.andThen(toLangElement), placeholders)
+        send(receiver, placeholders, message.andThen(toLangElement))
     }
 
     fun send(
         receiver: CommandSender,
-        message: (LangConfig) -> LangElement,
         placeholders: Map<String, Any> = emptyMap(),
+        message: (LangConfig) -> LangElement,
     ) {
         send(receiver, message(configProvider.get()), placeholders)
     }

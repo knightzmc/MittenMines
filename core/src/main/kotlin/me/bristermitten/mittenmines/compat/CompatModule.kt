@@ -18,7 +18,6 @@ object CompatModule : MinesModule, KotlinModule() {
     @Provides
     fun provideRegionSelection(compat: VersionCompat) = compat.regionSelection
 
-
     @Provides
     fun provideBlockDataFactory(compat: VersionCompat) = compat.blockDataFactory
 }

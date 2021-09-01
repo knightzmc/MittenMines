@@ -7,5 +7,6 @@ data class Mine(
     val owner: MineOwner,
     var name: String?,
     var region: Region,
+    var miningRegion: Region,
     var spawnLocation: AngledWorldPoint,
 )

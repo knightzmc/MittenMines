@@ -1,12 +1,11 @@
 package me.bristermitten.mittenmines.compat.vanilla
 
-import me.bristermitten.mittenmines.compat.RegionSelection
 import me.bristermitten.mittenmines.compat.VersionCompat
 import me.bristermitten.mittenmines.modernworldedit.ModernBlockDataFactory
+import javax.inject.Inject
 
-object VanillaCompat : VersionCompat {
+class VanillaCompat @Inject constructor(override val regionSelection: VanillaRegionSelection) :
+    VersionCompat {
     override val blockPlacer = BukkitBlockPlacer
-    override val regionSelection: RegionSelection
-        get() = TODO("Not yet implemented")
     override val blockDataFactory = ModernBlockDataFactory
 }

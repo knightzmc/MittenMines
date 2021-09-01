@@ -4,10 +4,18 @@ import me.bristermitten.mittenmines.config.config
 
 data class LangConfig(
     val prefix: String,
-    val errors: ErrorLang
+    val errors: ErrorLang,
+    val commands: CommandLang
 ) {
     data class ErrorLang(
         val unknownPlayer: LangElement
+    )
+
+    data class CommandLang(
+        val pos1Reset: LangElement,
+        val pos1Set: LangElement,
+        val pos2Reset: LangElement,
+        val pos2Set: LangElement,
     )
     companion object {
         val CONFIG = config<LangConfig>("lang.yml")

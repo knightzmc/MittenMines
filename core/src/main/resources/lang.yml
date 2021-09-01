@@ -1,3 +1,8 @@
 prefix: '<gray><bold>[<purple>MittenMines</purple>]</gray>'
+commands:
+  pos1-reset: '<yellow>Your 1st Mine point was deselected because it was in a different world'
+  pos1-set: '<green>Set 1st Mine point to {x}, {y}, {z}'
+  pos2-reset: '<yellow>Your 2nd Mine point was deselected because it was in a different world'
+  pos2-set: '<green>Set 2nd Mine point to {x}, {y}, {z}'
 errors:
   unknown-player: '<red>Unknown player {value}'
