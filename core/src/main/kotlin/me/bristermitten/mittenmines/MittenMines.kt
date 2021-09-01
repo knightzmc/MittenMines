@@ -5,6 +5,7 @@ import me.bristermitten.mittenmines.compat.CompatModule
 import me.bristermitten.mittenmines.config.ConfigModule
 import me.bristermitten.mittenmines.config.GlobalConfig
 import me.bristermitten.mittenmines.lang.LangConfig
+import me.bristermitten.mittenmines.module.MinesModule
 import me.bristermitten.mittenmines.module.ModuleManager
 import me.bristermitten.mittenmines.privatemines.TemplatesConfig
 import me.bristermitten.mittenmines.serialization.SerializationModule
@@ -19,7 +20,7 @@ class MittenMines : JavaPlugin() {
         TemplatesConfig.CONFIG,
     )
 
-    private val modules = setOf(
+    private val modules = setOf<MinesModule>(
         TaxModule,
         GlobalTaxModule,
         SerializationModule,
