@@ -1,0 +1,5 @@
+name: MittenMines
+main: me.bristermitten.mittenmines.MittenMines
+version: 1.0
+softdepend:
+  - PlaceholderAPI
