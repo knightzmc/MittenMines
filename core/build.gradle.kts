@@ -47,12 +47,13 @@ tasks {
 
     shadowJar {
 //        minimize()
-//        listOf(
-//            "com.google.inject",
-//            "co.aikar.commands",
-//            "co.aikar.locales"
-//        ).forEach {
-//            relocate(it, "me.bristermitten.mittenmines.libs.$it")
-//        }
+        listOf(
+            "com.google.inject",
+            "com.google.common",
+            "co.aikar.commands",
+            "co.aikar.locales"
+        ).forEach {
+            relocate(it, "me.bristermitten.mittenmines.libs.$it")
+        }
     }
 }
