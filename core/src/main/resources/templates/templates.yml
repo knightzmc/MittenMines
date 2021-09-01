@@ -1,0 +1,6 @@
+# Mine Templates Config
+templates:
+  simple:
+    schematic: simple.schematic # This is the location of the schematic file to use, in the templates folder
+    permission: mines.simple # Players need this permission in order to be able to use this template
+    price: 0 # This template is free, as long as players have the permission
