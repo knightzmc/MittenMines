@@ -1,5 +1,6 @@
 package me.bristermitten.mittenmines
 
+import me.bristermitten.mittenmines.chat.ChatModule
 import me.bristermitten.mittenmines.commands.CommandsModule
 import me.bristermitten.mittenmines.compat.CompatModule
 import me.bristermitten.mittenmines.config.ConfigModule
@@ -21,7 +22,9 @@ class MittenMines : JavaPlugin() {
     )
 
     private val modules = setOf<MinesModule>(
+        CoreModule(this),
         TaxModule,
+        ChatModule,
         GlobalTaxModule,
         SerializationModule,
         ConfigModule(configs),
