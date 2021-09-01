@@ -1,5 +1,6 @@
 package me.bristermitten.mittenmines
 
+import me.bristermitten.mittenmines.commands.CommandsModule
 import me.bristermitten.mittenmines.compat.CompatModule
 import me.bristermitten.mittenmines.config.ConfigModule
 import me.bristermitten.mittenmines.config.GlobalConfig
@@ -23,7 +24,8 @@ class MittenMines : JavaPlugin() {
         GlobalTaxModule,
         SerializationModule,
         ConfigModule(configs),
-        CompatModule
+        CompatModule,
+        CommandsModule
     )
 
     override fun onEnable() {
