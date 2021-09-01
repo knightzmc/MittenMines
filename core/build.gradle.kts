@@ -23,8 +23,7 @@ dependencies {
     implementation("net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT")
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
 
-    implementation("com.google.inject:guice:5.0.1")
-    implementation("dev.misfitlabs.kotlinguice4:kotlin-guice:1.5.0")
+
 
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
 }

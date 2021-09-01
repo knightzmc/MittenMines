@@ -22,6 +22,9 @@ subprojects {
         compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
         implementation(kotlin("stdlib"))
 
+        // Libraries
+        implementation("com.google.inject:guice:5.0.1")
+        implementation("dev.misfitlabs.kotlinguice4:kotlin-guice:1.5.0")
     }
 
     tasks {
