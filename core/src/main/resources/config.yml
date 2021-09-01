@@ -1,5 +1,9 @@
 # Global Configuration
 
+privatemines:
+  enabled: true
+  world: privatemines # The world where all private mines are stored
+
 # Tax Module
 tax:
   enabled: true # If this is disabled, users will not be allowed to claim tax
