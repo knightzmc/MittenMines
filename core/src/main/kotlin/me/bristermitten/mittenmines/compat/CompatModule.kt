@@ -14,4 +14,7 @@ object CompatModule : MinesModule, KotlinModule() {
 
     @Provides
     fun provideBlockPlacer(compat: VersionCompat) = compat.blockPlacer
+
+    @Provides
+    fun provideRegionSelection(compat: VersionCompat) = compat.regionSelection
 }
