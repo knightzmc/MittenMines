@@ -30,3 +30,5 @@ data class WorldPoint(
 ) {
     fun toLocation() = Bukkit.getWorld(world)?.let { world -> Location(world, x, y, z) }
 }
+
+fun Location.toWorldPoint() = WorldPoint(world.name, x, y, z)

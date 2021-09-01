@@ -18,7 +18,7 @@ dependencies {
     // Plugin dependencies
     compileOnly("me.clip:placeholderapi:2.10.10")
 
-    // Libraries
+    // Librarie
     implementation("net.kyori:adventure-api:4.8.1")
     implementation("net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT")
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
@@ -40,6 +40,7 @@ tasks {
     }
 
     shadowJar {
+        minimize()
         listOf(
             "com.google",
             "co.aikar.commands",

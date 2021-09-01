@@ -1,4 +1,4 @@
-package me.bristermitten.mittenmines.legacyworldedit
+package me.bristermitten.mittenmines.modernworldedit
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter
 import com.sk89q.worldedit.function.pattern.Pattern
