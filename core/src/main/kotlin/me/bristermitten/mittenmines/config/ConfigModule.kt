@@ -2,6 +2,10 @@ package me.bristermitten.mittenmines.config
 
 import com.google.inject.TypeLiteral
 import dev.misfitlabs.kotlinguice4.KotlinModule
+import me.bristermitten.mittenmines.config.reader.GsonObjectMapper
+import me.bristermitten.mittenmines.config.reader.ObjectLoader
+import me.bristermitten.mittenmines.config.reader.ObjectMapper
+import me.bristermitten.mittenmines.config.reader.YamlObjectLoader
 import me.bristermitten.mittenmines.module.MinesModule
 import me.bristermitten.mittenmines.util.CompositeType
 
@@ -14,6 +18,8 @@ class ConfigModule(configurations: Set<Configuration<*>>) : MinesModule, KotlinM
 
     override fun configure() {
         configs.forEach { (key, provider) ->
+            bind<ObjectMapper>().to<GsonObjectMapper>()
+            bind<ObjectLoader>().to<YamlObjectLoader>()
 
             @Suppress("UNCHECKED_CAST")
             bind(key as Class<in Any>).toProvider(provider)
