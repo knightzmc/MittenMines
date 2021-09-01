@@ -1,4 +1,5 @@
 package me.bristermitten.mittenmines.modernworldedit
+
 import com.sk89q.worldedit.WorldEdit
 import com.sk89q.worldedit.bukkit.BukkitWorld
 import com.sk89q.worldedit.regions.CuboidRegion
@@ -14,11 +15,12 @@ object ModernBlockPlacer : BlockPlacer {
         val world = Bukkit.getWorld(point.world)?.let(::BukkitWorld)
             ?: throw IllegalArgumentException("Cannot find world for point $point")
 
-        WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
-            .setBlock(
-                point.toVector(),
-                blockPattern.toWEPattern()
-            )
+        val editSession = WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
+        editSession.setBlock(
+            point.toVector(),
+            blockPattern.toWEPattern()
+        )
+        editSession.flushSession()
     }
 
     override fun setRegion(blockPattern: BlockPattern, region: Region) {
@@ -26,10 +28,11 @@ object ModernBlockPlacer : BlockPlacer {
             ?: throw IllegalArgumentException("Cannot find world for region $region")
         val weRegion = CuboidRegion(region.min.toVector(), region.max.toVector())
 
-        WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
-            .setBlocks(
-                weRegion,
-                blockPattern.toWEPattern()
-            )
+        val editSession = WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
+        editSession.setBlocks(
+            weRegion,
+            blockPattern.toWEPattern()
+        )
+        editSession.flushSession()
     }
 }

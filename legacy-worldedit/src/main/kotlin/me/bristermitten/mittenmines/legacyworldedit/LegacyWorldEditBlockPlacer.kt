@@ -16,11 +16,12 @@ object LegacyBlockPlacer : BlockPlacer {
         val world = Bukkit.getWorld(point.world)?.let(::BukkitWorld)
             ?: throw IllegalArgumentException("Cannot find world for point $point")
 
-        WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
-            .setBlock(
-                point.toVector(),
-                Patterns.wrap(blockPattern.toWEPattern())
-            )
+        val editSession = WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
+        editSession.setBlock(
+            point.toVector(),
+            Patterns.wrap(blockPattern.toWEPattern())
+        )
+        editSession.flushQueue()
     }
 
     override fun setRegion(blockPattern: BlockPattern, region: Region) {
@@ -28,10 +29,11 @@ object LegacyBlockPlacer : BlockPlacer {
             ?: throw IllegalArgumentException("Cannot find world for region $region")
         val weRegion = CuboidRegion(region.min.toVector(), region.max.toVector())
 
-        WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
-            .setBlocks(
-                weRegion,
-                Patterns.wrap(blockPattern.toWEPattern())
-            )
+        val editSession = WorldEdit.getInstance().editSessionFactory.getEditSession(world as World, -1)
+        editSession.setBlocks(
+            weRegion,
+            Patterns.wrap(blockPattern.toWEPattern())
+        )
+        editSession.flushQueue()
     }
 }
