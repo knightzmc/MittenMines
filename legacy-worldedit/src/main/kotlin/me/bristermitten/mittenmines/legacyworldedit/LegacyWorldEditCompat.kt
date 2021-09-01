@@ -6,4 +6,6 @@ object LegacyWorldEditCompat : VersionCompat {
     override val blockPlacer = LegacyBlockPlacer
 
     override val regionSelection = LegacyRegionSelection
+
+    override val blockDataFactory = LegacyBlockDataFactory
 }

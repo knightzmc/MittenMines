@@ -3,8 +3,8 @@ package me.bristermitten.mittenmines.commands
 import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.Subcommand
-import me.bristermitten.mittenmines.block.BlockData
 import me.bristermitten.mittenmines.block.ConstantBlockPattern
+import me.bristermitten.mittenmines.compat.BlockDataFactory
 import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.compat.RegionSelection
 import me.bristermitten.mittenmines.entity.Mine
@@ -19,6 +19,7 @@ import javax.inject.Inject
 class MinesCommand @Inject constructor(
     private val regionSelection: RegionSelection,
     private val blockPlacer: BlockPlacer,
+    private val blockDataFactory: BlockDataFactory,
 ) : BaseCommand() {
 
     @Subcommand("create")
@@ -29,7 +30,7 @@ class MinesCommand @Inject constructor(
         }
 
         val mine = Mine(UUID.randomUUID(), ServerOwner, null, selection, player.location.toWorldPoint())
-        blockPlacer.setRegion(ConstantBlockPattern(BlockData(Material.COAL_ORE)), mine.region)
+        blockPlacer.setRegion(ConstantBlockPattern(blockDataFactory.createBlockData(Material.COAL_ORE)), mine.region)
         player.teleport(mine.spawnLocation.toLocation())
     }
 }
