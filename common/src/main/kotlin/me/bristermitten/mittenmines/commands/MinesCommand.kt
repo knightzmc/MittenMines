@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
 import kotlinx.coroutines.launch
 import me.bristermitten.mittenmines.MittenMines
-import me.bristermitten.mittenmines.block.ConstantBlockPattern
+import me.bristermitten.mittenmines.block.RandomBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
 import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.compat.RegionSelection
@@ -55,7 +55,9 @@ class MinesCommand @Inject constructor(
 
         val mine =
             Mine(UUID.randomUUID(), ServerOwner, name, selection, selection, player.location.toAngledWorldPoint())
-        blockPlacer.setRegion(ConstantBlockPattern(blockDataFactory.createBlockData(Material.COAL_ORE)), mine.region)
+        blockPlacer.setRegion(RandomBlockPattern(
+            mapOf(blockDataFactory.createBlockData(Material.COAL_ORE) to 1,
+                blockDataFactory.createBlockData(Material.IRON_ORE) to 2)), mine.region)
         player.teleport(mine.spawnLocation.toLocation())
         async.launch {
             mineStorage.save(mine)
@@ -68,7 +70,9 @@ class MinesCommand @Inject constructor(
         val oldName = mine.name ?: "[unnamed]"
         when (val result = mineManager.rename(mine, newName)) {
             is Fail -> result.exception.report(langService, sender)
-            is Success -> langService.send(sender, mapOf("{old-name}" to oldName, "{new-name}" to newName)) {langConfig -> langConfig.commands.mineRenamed }
+            is Success -> langService.send(sender,
+                mapOf("{old-name}" to oldName,
+                    "{new-name}" to newName)) { langConfig -> langConfig.commands.mineRenamed }
         }
     }
 
