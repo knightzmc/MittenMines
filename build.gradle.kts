@@ -26,11 +26,19 @@ subprojects {
         // Libraries
         implementation("com.google.inject:guice:5.0.1")
         implementation("dev.misfitlabs.kotlinguice4:kotlin-guice:1.5.0")
+
+        // Testing
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+        testImplementation("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
     }
 
     tasks {
         compileKotlin {
             kotlinOptions.javaParameters = true
+        }
+        test {
+            useJUnitPlatform()
         }
     }
 }

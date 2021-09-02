@@ -15,10 +15,6 @@ dependencies {
 
 
 tasks {
-    test {
-        useJUnitPlatform()
-    }
-
     register<Copy>("copyJarToServerPlugins") {
         from(getByPath("shadowJar"))
         into(layout.projectDirectory.dir("../server/plugins"))
