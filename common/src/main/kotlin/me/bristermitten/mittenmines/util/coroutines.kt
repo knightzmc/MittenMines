@@ -10,8 +10,11 @@ import org.bukkit.scheduler.BukkitTask
 import java.lang.Runnable
 import kotlin.coroutines.CoroutineContext
 
+
 val HasPlugin.syncDispatcher get() = plugin.dispatcher(false)
+val HasPlugin.sync get() = CoroutineScope(syncDispatcher)
 val HasPlugin.asyncDispatcher get() = plugin.dispatcher(true)
+val HasPlugin.async get() = CoroutineScope(asyncDispatcher)
 
 /*
 Credit: https://github.com/okkero/Skedule/blob/master/src/main/kotlin/com/okkero/skedule/BukkitDispatcher.kt
