@@ -6,6 +6,7 @@ import java.util.*
 
 interface MineStorage {
     suspend fun getMine(uuid: UUID): Mine?
+    fun lookupMine(uuid: UUID) : Mine?
 
     suspend fun save(mine: Mine)
 

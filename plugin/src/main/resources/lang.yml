@@ -7,4 +7,5 @@ commands:
   mine-renamed: '<green>Renamed Mine <gray>{old-name} <green>to <gray>{new-name}!'
 errors:
   unknown-player: '<red>Unknown player {value}'
+  unknown-mine: '<red>Unknown player {value}'
   mine-name-exists: '<red>A mine already exists named <yellow>{name}!'

@@ -22,6 +22,10 @@ class CachingMineStorage @Inject constructor(private val minePersistence: MinePe
         return loaded
     }
 
+    override fun lookupMine(uuid: UUID): Mine? {
+        return cache.getIfPresent(uuid)
+    }
+
     override suspend fun save(mine: Mine) {
         cache.put(mine.id, mine)
         minePersistence.save(mine)

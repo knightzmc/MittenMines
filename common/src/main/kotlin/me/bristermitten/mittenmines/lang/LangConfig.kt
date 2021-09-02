@@ -9,6 +9,7 @@ data class LangConfig(
 ) {
     data class ErrorLang(
         val unknownPlayer: LangElement,
+        val unknownMine: LangElement,
         val mineNameExists: LangElement,
     )
 

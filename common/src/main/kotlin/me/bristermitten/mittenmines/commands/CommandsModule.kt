@@ -6,6 +6,7 @@ import dev.misfitlabs.kotlinguice4.KotlinModule
 import dev.misfitlabs.kotlinguice4.multibindings.KotlinMultibinder
 import me.bristermitten.mittenmines.commands.args.ArgumentCondition
 import me.bristermitten.mittenmines.commands.args.ArgumentProcessor
+import me.bristermitten.mittenmines.commands.args.MineProcessor
 import me.bristermitten.mittenmines.commands.args.OfflinePlayerProcessor
 import me.bristermitten.mittenmines.module.MinesModule
 
@@ -25,6 +26,7 @@ object CommandsModule : MinesModule, KotlinModule() {
 
         val argProcessorBinder = KotlinMultibinder.newSetBinder<ArgumentProcessor<*>>(binder())
         argProcessorBinder.addBinding().to<OfflinePlayerProcessor>()
+        argProcessorBinder.addBinding().to<MineProcessor>()
 
         val conditionBinder = KotlinMultibinder.newSetBinder<ArgumentCondition<*>>(binder())
     }
