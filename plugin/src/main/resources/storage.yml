@@ -1,0 +1,15 @@
+# Controls where plugin data gets saved
+
+# Options
+# json - Store plugin data in .json files
+# sqlite - Store plugin data in a single .db file
+# mariadb - Store plugin data in a remote MariaDB / MySQL database. Requires the "database" settings to be properly configured
+type: JSON
+
+# You only need to touch these if you are using a remote database
+database:
+  host: "127.0.0.1"
+  database: "mittenmines"
+  username: ""
+  password: ""
+  port: 3306
