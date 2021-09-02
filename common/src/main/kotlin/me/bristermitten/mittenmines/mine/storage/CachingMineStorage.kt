@@ -6,7 +6,9 @@ import me.bristermitten.mittenmines.mine.MineOwner
 import me.bristermitten.mittenmines.mine.persistence.MinePersistence
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CachingMineStorage @Inject constructor(private val minePersistence: MinePersistence) : MineStorage {
     private val cache = CacheBuilder.newBuilder().build<UUID, Mine>()
 
