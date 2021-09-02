@@ -2,6 +2,8 @@ package me.bristermitten.mittenmines.commands
 
 import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
+import co.aikar.commands.annotation.CommandPermission
+import co.aikar.commands.annotation.Optional
 import co.aikar.commands.annotation.Subcommand
 import kotlinx.coroutines.launch
 import me.bristermitten.mittenmines.MittenMines
@@ -41,20 +43,22 @@ class MinesCommand @Inject constructor(
 ) : BaseCommand(), HasPlugin {
 
     @Subcommand("create")
-    fun createMine(player: Player) {
+    @CommandPermission("mittenmines.create")
+    fun createMine(player: Player, @Optional name: String?) {
         val selection = regionSelection.getSelection(player) ?: run {
             player.sendMessage("You need to select a region to be the mine")
             return
         }
 
         val mine =
-            Mine(UUID.randomUUID(), ServerOwner, null, selection, selection, player.location.toAngledWorldPoint())
+            Mine(UUID.randomUUID(), ServerOwner, name, selection, selection, player.location.toAngledWorldPoint())
         blockPlacer.setRegion(ConstantBlockPattern(blockDataFactory.createBlockData(Material.COAL_ORE)), mine.region)
         player.teleport(mine.spawnLocation.toLocation())
         async.launch {
             mineStorage.save(mine)
         }
     }
+
 
     @Subcommand("list")
     fun listMines(sender: CommandSender) {
