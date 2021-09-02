@@ -24,7 +24,10 @@ class BlocksMenu @Inject constructor(
             .create()
 
         gui.setCloseGuiAction {
-            mineManager.setPattern(mine, blockPatternFactory.createPattern(gui.inventory.filterNotNull()))
+            val newPattern = blockPatternFactory.createPattern(gui.inventory.filterNotNull())
+            if (newPattern != blockPattern) {
+                mineManager.setPattern(mine, newPattern)
+            }
         }
         gui.setDefaultClickAction {
             if (it.clickedInventory != it.inventory) {
@@ -54,7 +57,7 @@ class BlocksMenu @Inject constructor(
             .forEach {
                 gui.addItem(GuiItem(it, null))
             }
-
+        gui.addItem()
         return gui
     }
 }

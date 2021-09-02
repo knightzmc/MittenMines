@@ -37,4 +37,19 @@ class RandomBlockPattern : BlockPattern {
     }
 
     override fun getItems(): List<BlockData> = all
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is RandomBlockPattern) return false
+
+        if (all != other.all) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return all.hashCode()
+    }
+
+
 }
