@@ -82,8 +82,7 @@ class MinesCommand @Inject constructor(
     @Subcommand("menu")
     @CommandPermission("mittenmines.menu")
     fun menu(sender: Player, mine: Mine) {
-        blocksMenu.create(mine)
-            .open(sender)
+        blocksMenu.create(mine).open(sender)
     }
 
 
@@ -93,9 +92,10 @@ class MinesCommand @Inject constructor(
         val oldName = mine.name ?: "[unnamed]"
         when (val result = mineManager.rename(mine, newName)) {
             is Fail -> result.exception.report(langService, sender)
-            is Success -> langService.send(sender,
-                mapOf("{old-name}" to oldName,
-                    "{new-name}" to newName)) { langConfig -> langConfig.commands.mineRenamed }
+            is Success -> langService.send(
+                sender,
+                mapOf("{old-name}m" to oldName, "{new-name}" to newName)
+            ) { langConfig -> langConfig.commands.mineRenamed }
         }
     }
 
