@@ -18,8 +18,8 @@ class ConfigModule(configurations: Set<Configuration<*>>) : MinesModule, KotlinM
 
     override fun configure() {
         configs.forEach { (key, provider) ->
-            bind<ObjectMapper>().to<GsonObjectMapper>()
-            bind<ObjectLoader>().to<YamlObjectLoader>()
+            bind<ObjectMapper>().to(GsonObjectMapper::class.java)
+            bind<ObjectLoader>().to(YamlObjectLoader::class.java)
 
             @Suppress("UNCHECKED_CAST")
             bind(key as Class<in Any>).toProvider(provider)
