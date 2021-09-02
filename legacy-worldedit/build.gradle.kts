@@ -3,8 +3,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(project(":api"))
-    compileOnly(project(":compat"))
+    compileOnly(project(":common"))
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:6.1"){
         exclude("org.bukkit")
     }

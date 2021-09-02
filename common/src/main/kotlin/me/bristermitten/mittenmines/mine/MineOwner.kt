@@ -1,4 +1,4 @@
-package me.bristermitten.mittenmines.entity
+package me.bristermitten.mittenmines.mine
 
 import java.util.*
 

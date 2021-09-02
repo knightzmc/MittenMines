@@ -15,7 +15,6 @@ subprojects {
         maven("https://hub.spigotmc.org/nexus/content/groups/public/")
         maven("https://oss.sonatype.org/content/repositories/snapshots")
         maven("https://oss.sonatype.org/content/groups/central")
-        maven("http://nexus.okkero.com/repository/maven-releases/")
     }
 
     dependencies {
@@ -23,7 +22,6 @@ subprojects {
         compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
         implementation(kotlin("stdlib"))
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-        implementation("com.okkero.skedule:skedule:1.2.6")
 
         // Libraries
         implementation("com.google.inject:guice:5.0.1")

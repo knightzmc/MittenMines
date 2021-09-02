@@ -2,7 +2,6 @@ package me.bristermitten.mittenmines
 
 import me.bristermitten.mittenmines.chat.ChatModule
 import me.bristermitten.mittenmines.commands.CommandsModule
-import me.bristermitten.mittenmines.compat.CompatModule
 import me.bristermitten.mittenmines.config.ConfigModule
 import me.bristermitten.mittenmines.config.GlobalConfig
 import me.bristermitten.mittenmines.lang.LangConfig
@@ -21,14 +20,14 @@ class MittenMines : JavaPlugin() {
         TemplatesConfig.CONFIG,
     )
 
-    private val modules = setOf<MinesModule>(
+    private val modules = setOf(
         CoreModule(this),
         TaxModule,
         ChatModule,
         GlobalTaxModule,
         SerializationModule,
         ConfigModule(configs),
-        CompatModule,
+        Class.forName("me.bristermitten.mittenmines.compat.CompatModule").kotlin.objectInstance as MinesModule,
         CommandsModule
     )
 

@@ -1,18 +1,15 @@
 package me.bristermitten.mittenmines.util
 
 import java.lang.reflect.ParameterizedType
-import java.lang.reflect.Type
 
 // Credit: https://stackoverflow.com/a/49418496/6272977
-class CompositeType(private val baseClass: Class<*>, vararg genericClasses: Class<*>) : ParameterizedType {
+class CompositeType(private val baseClass: Class<*>, private vararg val genericClasses: Class<*>) : ParameterizedType {
     private val name: String
     override fun getTypeName(): String {
         return name
     }
 
-    private val genericClass: Array<Type>
-
-    override fun getActualTypeArguments() = genericClass
+    override fun getActualTypeArguments() = genericClasses
 
     override fun getRawType() =
         baseClass
@@ -21,7 +18,7 @@ class CompositeType(private val baseClass: Class<*>, vararg genericClasses: Clas
 
 
     init {
-        genericClass = genericClasses.map { it }.toTypedArray() // what?
+        // what?
         val generics: List<String> = genericClasses.asList()
             .map { obj -> obj.name }
         val genericTypeString: String = generics.joinToString(",")

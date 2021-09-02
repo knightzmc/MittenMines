@@ -11,6 +11,8 @@ import me.bristermitten.mittenmines.entity.*
 import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.lang.LangElement
 import me.bristermitten.mittenmines.lang.LangService
+import me.bristermitten.mittenmines.mine.Mine
+import me.bristermitten.mittenmines.mine.ServerOwner
 import me.bristermitten.mittenmines.player.MinesPlayer
 import me.bristermitten.mittenmines.player.MinesPlayerStorage
 import org.bukkit.Material

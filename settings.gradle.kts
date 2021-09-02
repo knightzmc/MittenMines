@@ -1,6 +1,5 @@
 rootProject.name = "MittenMines"
-include("compat")
-include("core")
+include("plugin")
 include("legacy-worldedit")
 include("modern-worldedit")
-include("api")
+include("common")

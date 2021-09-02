@@ -1,5 +1,7 @@
-package me.bristermitten.mittenmines.entity
+package me.bristermitten.mittenmines.mine
 
+import me.bristermitten.mittenmines.entity.AngledWorldPoint
+import me.bristermitten.mittenmines.entity.Region
 import java.util.*
 
 data class Mine(
