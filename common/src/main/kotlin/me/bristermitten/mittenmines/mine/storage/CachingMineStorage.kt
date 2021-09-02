@@ -35,6 +35,9 @@ class CachingMineStorage @Inject constructor(private val minePersistence: MinePe
         return cache.asMap().values
     }
 
+    override suspend fun saveAll() {
+        minePersistence.saveAll(cache.asMap().values)
+    }
 
     override suspend fun getMinesByOwner(owner: MineOwner): Collection<Mine> {
         return fetchAll().filter { it.owner == owner }

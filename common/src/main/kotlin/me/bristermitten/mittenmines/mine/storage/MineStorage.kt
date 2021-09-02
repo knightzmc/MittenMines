@@ -14,4 +14,6 @@ interface MineStorage {
     fun getAll(): Collection<Mine>
 
     suspend fun getMinesByOwner(owner: MineOwner): Collection<Mine>
+
+    suspend fun saveAll()
 }
