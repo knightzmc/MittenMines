@@ -21,6 +21,7 @@ class RandomBlockPattern : BlockPattern {
             return listOf(weights.keys.first())
         }
 
+
         // We try and simplify the ratios here to make the list a bit smaller
         val (min, max) = minMax(weights.entries) { it.value }
         val gcd = min.value.toBigInteger().gcd(max.value.toBigInteger()).toInt()

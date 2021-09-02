@@ -11,7 +11,7 @@ class BlockPatternFactory @Inject constructor(private val blockDataFactory: Bloc
             return ConstantBlockPattern(blockDataFactory.createBlockData(head))
         }
 
-        val dataList = items.map { blockDataFactory.createBlockData(it) }
+        val dataList = items.flatMap { List(it.amount) { _ -> blockDataFactory.createBlockData(it) } }
         return RandomBlockPattern(dataList)
     }
 }
