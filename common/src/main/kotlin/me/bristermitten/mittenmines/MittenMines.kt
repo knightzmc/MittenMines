@@ -2,6 +2,7 @@ package me.bristermitten.mittenmines
 
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import me.bristermitten.mittenmines.block.BlockModule
 import me.bristermitten.mittenmines.chat.ChatModule
 import me.bristermitten.mittenmines.commands.CommandsModule
 import me.bristermitten.mittenmines.config.ConfigModule
@@ -31,6 +32,7 @@ class MittenMines : JavaPlugin(), HasPlugin {
     )
 
     private val modules = setOf(
+        BlockModule,
         CoreModule(this),
         TaxModule,
         ChatModule,

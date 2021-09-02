@@ -53,15 +53,29 @@ class MinesCommand @Inject constructor(
             return
         }
 
-        val mine =
-            Mine(UUID.randomUUID(), ServerOwner, name, selection, selection, player.location.toAngledWorldPoint())
-        blockPlacer.setRegion(RandomBlockPattern(
-            mapOf(blockDataFactory.createBlockData(Material.COAL_ORE) to 1,
-                blockDataFactory.createBlockData(Material.IRON_ORE) to 2)), mine.region)
+        val pattern = RandomBlockPattern(mapOf(
+            blockDataFactory.createBlockData(Material.COAL_ORE) to 1,
+            blockDataFactory.createBlockData(Material.IRON_ORE) to 2
+        ))
+        val mine = Mine(UUID.randomUUID(),
+            ServerOwner,
+            name,
+            selection,
+            selection,
+            player.location.toAngledWorldPoint(),
+            pattern)
+
+        blockPlacer.setRegion(pattern, mine.region)
         player.teleport(mine.spawnLocation.toLocation())
         async.launch {
             mineStorage.save(mine)
         }
+    }
+
+    @Subcommand("reset")
+    @CommandPermission("mittenmines.reset")
+    fun reset(sender: CommandSender, mine: Mine) {
+        blockPlacer.setRegion(mine.pattern, mine.region)
     }
 
     @Subcommand("rename")
