@@ -30,7 +30,8 @@ tasks {
     }
 
     shadowJar {
-//        minimize()
+        minimize()
+        this.archiveFileName.set("MittenMines.jar")
         listOf(
 //            "com.google.inject",
             "com.google.common",
