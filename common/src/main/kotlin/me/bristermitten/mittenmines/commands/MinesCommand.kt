@@ -44,7 +44,7 @@ class MinesCommand @Inject constructor(
 
     @Subcommand("create")
     @CommandPermission("mittenmines.create")
-    fun createMine(player: Player, @Optional name: String?) {
+    fun createMine(player: Player, name: String) {
         val selection = regionSelection.getSelection(player) ?: run {
             player.sendMessage("You need to select a region to be the mine")
             return
