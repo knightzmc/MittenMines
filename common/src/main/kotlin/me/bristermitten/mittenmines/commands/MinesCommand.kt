@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.Subcommand
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.bristermitten.mittenmines.MittenMines
-import me.bristermitten.mittenmines.block.RandomBlockPattern
+import me.bristermitten.mittenmines.block.ConstantBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
 import me.bristermitten.mittenmines.compat.RegionSelection
 import me.bristermitten.mittenmines.entity.WorldBlockPoint
@@ -55,10 +55,8 @@ class MinesCommand @Inject constructor(
             return
         }
 
-        val pattern = RandomBlockPattern(mapOf(
-            blockDataFactory.createBlockData(Material.COAL_ORE) to 1,
-            blockDataFactory.createBlockData(Material.IRON_ORE) to 2
-        ))
+        val pattern = ConstantBlockPattern(blockDataFactory.createBlockData(Material.STONE))
+        
         val mine = Mine(UUID.randomUUID(),
             ServerOwner,
             name,
