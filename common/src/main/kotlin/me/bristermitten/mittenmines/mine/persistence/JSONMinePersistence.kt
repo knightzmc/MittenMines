@@ -25,6 +25,12 @@ class JSONMinePersistence @Inject constructor(private val gson: Gson, plugin: Pl
         loadAll().firstOrNull { it.id == id }
     }
 
+    override suspend fun delete(value: UUID) = withContext(Dispatchers.IO) {
+        val all = loadAll().toMutableList()
+        all.removeIf { it.id == value }
+        saveAll(all)
+    }
+
     @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun loadAll(): Collection<Mine> = withContext(Dispatchers.IO) {
         if (!file.exists()) {

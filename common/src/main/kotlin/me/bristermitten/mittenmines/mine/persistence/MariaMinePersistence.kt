@@ -14,6 +14,10 @@ class MariaMinePersistence() : MinePersistence {
         TODO("Not yet implemented")
     }
 
+    override suspend fun delete(value: UUID) {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun loadAll(): Collection<Mine> {
         TODO("Not yet implemented")
     }

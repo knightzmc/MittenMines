@@ -85,6 +85,13 @@ class MinesCommand @Inject constructor(
         blocksMenu.create(mine).open(sender)
     }
 
+    @Subcommand("delete")
+    @CommandPermission("mittenmines.delete")
+    fun delete(sender: CommandSender, mine: Mine) {
+        async.launch {
+            mineManager.delete(mine)
+        }
+    }
 
     @Subcommand("rename")
     @CommandPermission("mittenmines.rename")

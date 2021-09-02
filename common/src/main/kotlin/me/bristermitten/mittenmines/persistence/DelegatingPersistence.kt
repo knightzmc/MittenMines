@@ -23,4 +23,6 @@ abstract class DelegatingPersistence<U, T, P : Persistence<U, T>> @Inject constr
     override suspend fun loadAll(): Collection<T> = getDelegate().loadAll()
 
     override suspend fun saveAll(values: Collection<T>) = getDelegate().saveAll(values)
+
+    override suspend fun delete(value: U) = getDelegate().delete(value)
 }

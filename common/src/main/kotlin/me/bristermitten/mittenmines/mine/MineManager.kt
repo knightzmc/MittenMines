@@ -28,4 +28,8 @@ class MineManager @Inject constructor(private val mineStorage: MineStorage, priv
         mine.pattern = pattern
         fill(mine)
     }
+
+    suspend fun delete(mine: Mine) {
+        mineStorage.delete(mine.id)
+    }
 }
