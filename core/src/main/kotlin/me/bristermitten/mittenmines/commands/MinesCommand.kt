@@ -7,16 +7,17 @@ import me.bristermitten.mittenmines.block.ConstantBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
 import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.compat.RegionSelection
-import me.bristermitten.mittenmines.entity.Mine
-import me.bristermitten.mittenmines.entity.ServerOwner
-import me.bristermitten.mittenmines.entity.toAngledWorldPoint
-import me.bristermitten.mittenmines.entity.toWorldPoint
+import me.bristermitten.mittenmines.entity.*
+import me.bristermitten.mittenmines.lang.LangConfig
+import me.bristermitten.mittenmines.lang.LangElement
 import me.bristermitten.mittenmines.lang.LangService
+import me.bristermitten.mittenmines.player.MinesPlayer
 import me.bristermitten.mittenmines.player.MinesPlayerStorage
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import java.util.*
 import javax.inject.Inject
+import kotlin.reflect.KMutableProperty1
 
 @CommandAlias(COMMAND_NAMES)
 class MinesCommand @Inject constructor(
@@ -42,25 +43,37 @@ class MinesCommand @Inject constructor(
 
     @Subcommand("pos1|p1")
     fun pos1(player: Player) {
+        return setPos(player,
+            MinesPlayer::selection1,
+            MinesPlayer::selection2,
+            { it.commands.pos2Reset },
+            { it.commands.pos1Set })
+    }
+
+    private fun setPos(
+        player: Player,
+        p: KMutableProperty1<MinesPlayer, WorldPoint?>,
+        other: KMutableProperty1<MinesPlayer, WorldPoint?>,
+        otherResetMessage: (LangConfig) -> LangElement,
+        normalMessage: (LangConfig) -> LangElement,
+    ) {
         val minesPlayer = minesPlayerStorage[player]
         val newPos = player.location.toWorldPoint()
-        minesPlayer.selection1 = newPos
-        if (minesPlayer.selection2 != null && minesPlayer.selection2?.world != newPos.world) {
-            minesPlayer.selection2 = null
-            langService.send(player) { it.commands.pos2Reset }
+        p.set(minesPlayer, newPos)
+        val otherPoint = other.get(minesPlayer)
+        if (otherPoint != null && otherPoint.world != newPos.world) {
+            other.set(minesPlayer, null)
+            langService.send(player, otherResetMessage)
         }
-        langService.send(player, mapOf("{x}" to newPos.x, "{y}" to newPos.y, "{z}" to newPos.z)) { it.commands.pos1Set }
+        langService.send(player, mapOf("{x}" to newPos.x, "{y}" to newPos.y, "{z}" to newPos.z), normalMessage)
     }
 
     @Subcommand("pos2|p2")
     fun pos2(player: Player) {
-        val minesPlayer = minesPlayerStorage[player]
-        val newPos = player.location.toWorldPoint()
-        minesPlayer.selection2 = newPos
-        if (minesPlayer.selection1 != null && minesPlayer.selection1?.world != newPos.world) {
-            minesPlayer.selection1 = null
-            langService.send(player) { it.commands.pos1Reset }
-        }
-        langService.send(player, mapOf("{x}" to newPos.x, "{y}" to newPos.y, "{z}" to newPos.z)) { it.commands.pos2Set }
+        return setPos(player,
+            MinesPlayer::selection2,
+            MinesPlayer::selection1,
+            { it.commands.pos1Reset },
+            { it.commands.pos2Set })
     }
 }

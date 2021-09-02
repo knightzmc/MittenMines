@@ -51,6 +51,11 @@ class LangService @Inject constructor(
 
     fun send(
         receiver: CommandSender,
+        message: (LangConfig) -> LangElement,
+    ) = send(receiver, emptyMap(), message)
+
+    fun send(
+        receiver: CommandSender,
         placeholders: Map<String, Any> = emptyMap(),
         message: (LangConfig) -> LangElement,
     ) {
