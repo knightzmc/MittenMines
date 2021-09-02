@@ -27,7 +27,7 @@ class MittenMines : JavaPlugin() {
         GlobalTaxModule,
         SerializationModule,
         ConfigModule(configs),
-        Class.forName("me.bristermitten.mittenmines.compat.CompatModule").kotlin.objectInstance as MinesModule,
+        Class.forName("me.bristermitten.mittenmines.compat.CompatModule").getField("INSTANCE").get(null) as MinesModule,
         CommandsModule
     )
 
