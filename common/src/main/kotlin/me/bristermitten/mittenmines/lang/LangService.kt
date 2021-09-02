@@ -21,7 +21,13 @@ class LangService @Inject constructor(
             placeholders.entries.fold(str) { s, pattern -> s.replace(pattern.key, pattern.value.toString()) }
         }
         if (message.message != null) {
-            val replaced = applyPlaceholders(message.message)
+            val prefix = configProvider.get().prefix
+            val prefixedMessage = if (message.message != prefix) {
+                prefix + message.message
+            } else {
+                message.message
+            }
+            val replaced = applyPlaceholders(prefixedMessage)
             sendMessage(receiver, replaced)
         }
         if (message.title != null || message.subtitle != null) {
