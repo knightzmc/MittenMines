@@ -3,19 +3,29 @@ package me.bristermitten.mittenmines.commands
 import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.Subcommand
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import me.bristermitten.mittenmines.MittenMines
 import me.bristermitten.mittenmines.block.ConstantBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
 import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.compat.RegionSelection
-import me.bristermitten.mittenmines.entity.*
+import me.bristermitten.mittenmines.entity.WorldBlockPoint
+import me.bristermitten.mittenmines.entity.toAngledWorldPoint
+import me.bristermitten.mittenmines.entity.toWorldBlockPoint
 import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.lang.LangElement
 import me.bristermitten.mittenmines.lang.LangService
 import me.bristermitten.mittenmines.mine.Mine
 import me.bristermitten.mittenmines.mine.ServerOwner
+import me.bristermitten.mittenmines.mine.storage.MineStorage
 import me.bristermitten.mittenmines.player.MinesPlayer
 import me.bristermitten.mittenmines.player.MinesPlayerStorage
+import me.bristermitten.mittenmines.trait.HasPlugin
+import me.bristermitten.mittenmines.util.async
+import me.bristermitten.mittenmines.util.syncDispatcher
 import org.bukkit.Material
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import java.util.*
 import javax.inject.Inject
@@ -28,7 +38,9 @@ class MinesCommand @Inject constructor(
     private val blockDataFactory: BlockDataFactory,
     private val minesPlayerStorage: MinesPlayerStorage,
     private val langService: LangService,
-) : BaseCommand() {
+    private val mineStorage: MineStorage,
+    override val plugin: MittenMines,
+) : BaseCommand(), HasPlugin {
 
     @Subcommand("create")
     fun createMine(player: Player) {
@@ -41,6 +53,20 @@ class MinesCommand @Inject constructor(
             Mine(UUID.randomUUID(), ServerOwner, null, selection, selection, player.location.toAngledWorldPoint())
         blockPlacer.setRegion(ConstantBlockPattern(blockDataFactory.createBlockData(Material.COAL_ORE)), mine.region)
         player.teleport(mine.spawnLocation.toLocation())
+        async.launch {
+            mineStorage.save(mine)
+        }
+    }
+
+    @Subcommand("list")
+    fun listMines(sender: CommandSender) {
+        async.launch {
+            mineStorage.fetchAll().forEach {
+                withContext(syncDispatcher) {
+                    sender.sendMessage("${it.name} - ${it.owner} ${it.spawnLocation}")
+                }
+            }
+        }
     }
 
     @Subcommand("pos1|p1")
