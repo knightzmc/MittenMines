@@ -3,7 +3,6 @@ package me.bristermitten.mittenmines.commands
 import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
-import co.aikar.commands.annotation.Optional
 import co.aikar.commands.annotation.Subcommand
 import kotlinx.coroutines.launch
 import me.bristermitten.mittenmines.MittenMines
@@ -18,11 +17,14 @@ import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.lang.LangElement
 import me.bristermitten.mittenmines.lang.LangService
 import me.bristermitten.mittenmines.mine.Mine
+import me.bristermitten.mittenmines.mine.MineManager
 import me.bristermitten.mittenmines.mine.ServerOwner
 import me.bristermitten.mittenmines.mine.storage.MineStorage
 import me.bristermitten.mittenmines.player.MinesPlayer
 import me.bristermitten.mittenmines.player.MinesPlayerStorage
 import me.bristermitten.mittenmines.trait.HasPlugin
+import me.bristermitten.mittenmines.util.Fail
+import me.bristermitten.mittenmines.util.Success
 import me.bristermitten.mittenmines.util.async
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
@@ -40,6 +42,7 @@ class MinesCommand @Inject constructor(
     private val langService: LangService,
     private val mineStorage: MineStorage,
     override val plugin: MittenMines,
+    private val mineManager: MineManager,
 ) : BaseCommand(), HasPlugin {
 
     @Subcommand("create")
@@ -56,6 +59,16 @@ class MinesCommand @Inject constructor(
         player.teleport(mine.spawnLocation.toLocation())
         async.launch {
             mineStorage.save(mine)
+        }
+    }
+
+    @Subcommand("rename")
+    @CommandPermission("mittenmines.rename")
+    fun rename(sender: CommandSender, mine: Mine, newName: String) {
+        val oldName = mine.name ?: "[unnamed]"
+        when (val result = mineManager.rename(mine, newName)) {
+            is Fail -> result.exception.report(langService, sender)
+            is Success -> langService.send(sender, mapOf("{old-name}" to oldName, "{new-name}" to newName)) {langConfig -> langConfig.commands.mineRenamed }
         }
     }
 
