@@ -52,13 +52,13 @@ class MinesCommand @Inject constructor(
 
     private fun setPos(
         player: Player,
-        p: KMutableProperty1<MinesPlayer, WorldPoint?>,
-        other: KMutableProperty1<MinesPlayer, WorldPoint?>,
+        p: KMutableProperty1<MinesPlayer, WorldBlockPoint?>,
+        other: KMutableProperty1<MinesPlayer, WorldBlockPoint?>,
         otherResetMessage: (LangConfig) -> LangElement,
         normalMessage: (LangConfig) -> LangElement,
     ) {
         val minesPlayer = minesPlayerStorage[player]
-        val newPos = player.location.toWorldPoint()
+        val newPos = player.location.toWorldBlockPoint()
         p.set(minesPlayer, newPos)
         val otherPoint = other.get(minesPlayer)
         if (otherPoint != null && otherPoint.world != newPos.world) {

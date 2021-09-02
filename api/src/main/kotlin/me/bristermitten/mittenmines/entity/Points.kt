@@ -32,6 +32,16 @@ data class WorldPoint(
     fun toBlockPoint() = BlockPoint(x.toInt(), y.toInt(), z.toInt())
 }
 
+data class WorldBlockPoint(
+    val world: String,
+    val x: Int,
+    val y: Int,
+    val z: Int,
+) {
+    fun toLocation() = Bukkit.getWorld(world)?.let { world -> Location(world, x.toDouble(), y.toDouble(), z.toDouble()) }
+    fun toBlockPoint() = BlockPoint(x, y, z)
+}
+
 data class AngledWorldPoint(
     val world: String,
     val x: Double,
@@ -43,5 +53,6 @@ data class AngledWorldPoint(
     fun toLocation() = Bukkit.getWorld(world)?.let { world -> Location(world, x, y, z, yaw, pitch) }
 }
 
-fun Location.toWorldPoint() = WorldPoint(world.name, x, y, z)
+fun Location.WorldBlockPointtoWorldPoint() = WorldPoint(world.name, x, y, z)
+fun Location.toWorldBlockPoint() = WorldBlockPoint(world.name, blockX, blockY, blockZ)
 fun Location.toAngledWorldPoint() = AngledWorldPoint(world.name, x, y, z, yaw, pitch)
