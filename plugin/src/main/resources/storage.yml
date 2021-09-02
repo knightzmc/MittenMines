@@ -1,9 +1,9 @@
 # Controls where plugin data gets saved
 
 # Options
-# json - Store plugin data in .json files
-# sqlite - Store plugin data in a single .db file
-# mariadb - Store plugin data in a remote MariaDB / MySQL database. Requires the "database" settings to be properly configured
+# JSON - Store plugin data in .json files
+# SQLITE - Store plugin data in a single .db file
+# MARIADB - Store plugin data in a remote MariaDB / MySQL database. Requires the "database" settings to be properly configured
 type: JSON
 
 # You only need to touch these if you are using a remote database

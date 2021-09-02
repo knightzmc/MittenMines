@@ -5,8 +5,10 @@ import me.bristermitten.mittenmines.commands.CommandsModule
 import me.bristermitten.mittenmines.config.ConfigModule
 import me.bristermitten.mittenmines.config.GlobalConfig
 import me.bristermitten.mittenmines.lang.LangConfig
+import me.bristermitten.mittenmines.mine.MineModule
 import me.bristermitten.mittenmines.module.MinesModule
 import me.bristermitten.mittenmines.module.ModuleManager
+import me.bristermitten.mittenmines.persistence.PersistenceConfig
 import me.bristermitten.mittenmines.privatemines.TemplatesConfig
 import me.bristermitten.mittenmines.serialization.SerializationModule
 import me.bristermitten.mittenmines.tax.TaxModule
@@ -18,6 +20,7 @@ class MittenMines : JavaPlugin() {
         LangConfig.CONFIG,
         GlobalConfig.CONFIG,
         TemplatesConfig.CONFIG,
+        PersistenceConfig.CONFIG
     )
 
     private val modules = setOf(
@@ -28,7 +31,8 @@ class MittenMines : JavaPlugin() {
         SerializationModule,
         ConfigModule(configs),
         Class.forName("me.bristermitten.mittenmines.compat.CompatModule").getField("INSTANCE").get(null) as MinesModule,
-        CommandsModule
+        CommandsModule,
+        MineModule
     )
 
     override fun onEnable() {
