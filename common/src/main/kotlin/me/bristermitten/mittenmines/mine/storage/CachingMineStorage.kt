@@ -5,8 +5,9 @@ import me.bristermitten.mittenmines.mine.Mine
 import me.bristermitten.mittenmines.mine.MineOwner
 import me.bristermitten.mittenmines.mine.persistence.MinePersistence
 import java.util.*
+import javax.inject.Inject
 
-class CachingMineStorage(private val minePersistence: MinePersistence) : MineStorage {
+class CachingMineStorage @Inject constructor(private val minePersistence: MinePersistence) : MineStorage {
     private val cache = CacheBuilder.newBuilder().build<UUID, Mine>()
     override suspend fun getMine(uuid: UUID): Mine? {
         val inCache = cache.getIfPresent(uuid)
