@@ -5,6 +5,7 @@ import kotlinx.coroutines.runBlocking
 import me.bristermitten.mittenmines.chat.ChatModule
 import me.bristermitten.mittenmines.commands.CommandsModule
 import me.bristermitten.mittenmines.config.ConfigModule
+import me.bristermitten.mittenmines.config.FileWatcherService
 import me.bristermitten.mittenmines.config.GlobalConfig
 import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.mine.MineModule
@@ -44,9 +45,13 @@ class MittenMines : JavaPlugin(), HasPlugin {
     @Inject
     private lateinit var mineStorage: MineStorage
 
+    @Inject
+    private lateinit var fileWatcherService: FileWatcherService
+
     override fun onEnable() {
         val injector = ModuleManager(modules).makeInjector()
         injector.injectMembers(this)
+        fileWatcherService.watch()
         async.launch {
             mineStorage.fetchAll() // Start loading any mines
         }
