@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 class CachingMineStorage @Inject constructor(private val minePersistence: MinePersistence) : MineStorage {
     private val cache = CacheBuilder.newBuilder().build<UUID, Mine>()
+
     override suspend fun getMine(uuid: UUID): Mine? {
         val inCache = cache.getIfPresent(uuid)
         if (inCache != null) {

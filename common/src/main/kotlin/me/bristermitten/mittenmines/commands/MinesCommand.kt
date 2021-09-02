@@ -4,7 +4,6 @@ import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.Subcommand
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import me.bristermitten.mittenmines.MittenMines
 import me.bristermitten.mittenmines.block.ConstantBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
@@ -23,7 +22,6 @@ import me.bristermitten.mittenmines.player.MinesPlayer
 import me.bristermitten.mittenmines.player.MinesPlayerStorage
 import me.bristermitten.mittenmines.trait.HasPlugin
 import me.bristermitten.mittenmines.util.async
-import me.bristermitten.mittenmines.util.syncDispatcher
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -60,12 +58,8 @@ class MinesCommand @Inject constructor(
 
     @Subcommand("list")
     fun listMines(sender: CommandSender) {
-        async.launch {
-            mineStorage.fetchAll().forEach {
-                withContext(syncDispatcher) {
-                    sender.sendMessage("${it.name} - ${it.owner} ${it.spawnLocation}")
-                }
-            }
+        mineStorage.getAll().forEach {
+            sender.sendMessage("${it.name} - ${it.owner} ${it.spawnLocation}")
         }
     }
 
