@@ -9,7 +9,7 @@ import org.bukkit.entity.Player
 object LegacyRegionSelection : RegionSelection {
     override fun getSelection(player: Player): Region? {
         val selection = WorldEditPlugin.getPlugin(WorldEditPlugin::class.java)
-            .getSelection(player)
+            .getSelection(player) ?: return null
         val selector = selection.regionSelector
         if (selector.isDefined.not()) {
             return null
