@@ -49,7 +49,7 @@ class MinesCommand @Inject constructor(
             minesPlayer.selection2 = null
             langService.send(player) { it.commands.pos2Reset }
         }
-        langService.send(player) { it.commands.pos1Set }
+        langService.send(player, mapOf("{x}" to newPos.x, "{y}" to newPos.y, "{z}" to newPos.z)) { it.commands.pos1Set }
     }
 
     @Subcommand("pos2|p2")
@@ -61,6 +61,6 @@ class MinesCommand @Inject constructor(
             minesPlayer.selection1 = null
             langService.send(player) { it.commands.pos1Reset }
         }
-        langService.send(player) { it.commands.pos2Set }
+        langService.send(player, mapOf("{x}" to newPos.x, "{y}" to newPos.y, "{z}" to newPos.z)) { it.commands.pos2Set }
     }
 }
