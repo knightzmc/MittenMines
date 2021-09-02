@@ -6,14 +6,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.bristermitten.mittenmines.mine.Mine
 import org.bukkit.plugin.Plugin
-import java.nio.file.Path
 import java.util.*
 import javax.inject.Inject
 import kotlin.io.path.exists
 import kotlin.io.path.reader
 import kotlin.io.path.writer
 
-class JSONMinePersistence@Inject constructor(private val gson: Gson, plugin: Plugin) : MinePersistence {
+class JSONMinePersistence @Inject constructor(private val gson: Gson, plugin: Plugin) : MinePersistence {
     private val file = plugin.dataFolder.toPath().resolve("mines.json")
 
     override suspend fun save(value: Mine) = withContext(Dispatchers.IO) {
@@ -31,7 +30,7 @@ class JSONMinePersistence@Inject constructor(private val gson: Gson, plugin: Plu
         if (!file.exists()) {
             return@withContext emptySet()
         }
-        gson.fromJson(file.reader(), typeLiteral<Collection<Mine>>().type)
+        gson.fromJson(file.reader(), typeLiteral<Collection<Mine>>().type) ?: emptySet()
     }
 
     @Suppress("BlockingMethodInNonBlockingContext")
