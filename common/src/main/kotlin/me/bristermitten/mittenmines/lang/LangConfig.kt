@@ -18,7 +18,8 @@ data class LangConfig(
         val pos1Set: LangElement,
         val pos2Reset: LangElement,
         val pos2Set: LangElement,
-        val mineRenamed: LangElement
+        val mineRenamed: LangElement,
+        val mineDeleted: LangElement
     )
 
     companion object {

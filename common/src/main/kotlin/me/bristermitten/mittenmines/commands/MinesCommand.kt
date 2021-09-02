@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.bristermitten.mittenmines.MittenMines
 import me.bristermitten.mittenmines.block.RandomBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
@@ -26,6 +27,7 @@ import me.bristermitten.mittenmines.trait.HasPlugin
 import me.bristermitten.mittenmines.util.Fail
 import me.bristermitten.mittenmines.util.Success
 import me.bristermitten.mittenmines.util.async
+import me.bristermitten.mittenmines.util.syncDispatcher
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -90,6 +92,9 @@ class MinesCommand @Inject constructor(
     fun delete(sender: CommandSender, mine: Mine) {
         async.launch {
             mineManager.delete(mine)
+            withContext(syncDispatcher) {
+                langService.send(sender, mapOf("{mine}" to (mine.name ?: mine.id))) { it.commands.mineDeleted }
+            }
         }
     }
 
@@ -101,7 +106,7 @@ class MinesCommand @Inject constructor(
             is Fail -> result.exception.report(langService, sender)
             is Success -> langService.send(
                 sender,
-                mapOf("{old-name}m" to oldName, "{new-name}" to newName)
+                mapOf("{old-name}" to oldName, "{new-name}" to newName)
             ) { langConfig -> langConfig.commands.mineRenamed }
         }
     }

@@ -5,6 +5,7 @@ commands:
   pos2-reset: '<yellow>Your 2nd Mine point was deselected because it was in a different world'
   pos2-set: '<green>Set 2nd Mine point to {x}, {y}, {z}'
   mine-renamed: '<green>Renamed Mine <gray>{old-name} <green>to <gray>{new-name}!'
+  mine-deleted: '<green>Deleted mine <gray>{name}</gray>!'
 errors:
   unknown-player: '<red>Unknown player {value}'
   unknown-mine: '<red>Unknown mine {value}'
