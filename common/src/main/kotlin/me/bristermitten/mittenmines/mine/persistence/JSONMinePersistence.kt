@@ -10,6 +10,7 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.io.path.exists
 import kotlin.io.path.reader
+import kotlin.io.path.writeText
 import kotlin.io.path.writer
 
 class JSONMinePersistence @Inject constructor(private val gson: Gson, plugin: Plugin) : MinePersistence {
@@ -35,6 +36,7 @@ class JSONMinePersistence @Inject constructor(private val gson: Gson, plugin: Pl
 
     @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun saveAll(values: Collection<Mine>) = withContext(Dispatchers.IO) {
-        gson.toJson(values, file.writer())
+        val json = gson.toJson(values)
+        file.writeText(json)
     }
 }
