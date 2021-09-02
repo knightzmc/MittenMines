@@ -2,7 +2,18 @@ package me.bristermitten.mittenmines.block
 
 import me.bristermitten.mittenmines.util.minMax
 
-class RandomBlockPattern(weights: Map<BlockData, Int>) : BlockPattern {
+class RandomBlockPattern : BlockPattern {
+
+    val all: List<BlockData>
+
+    constructor(items: List<BlockData>) {
+        require(items.isNotEmpty())
+        this.all = items
+    }
+
+    constructor(weights: Map<BlockData, Int>) {
+        this.all = generateAll(weights)
+    }
 
     private fun generateAll(weights: Map<BlockData, Int>): List<BlockData> {
         require(weights.isNotEmpty())
@@ -20,9 +31,9 @@ class RandomBlockPattern(weights: Map<BlockData, Int>) : BlockPattern {
         return reducedWeights.flatMap { (key, value) -> List(value) { key } }
     }
 
-    val all = generateAll(weights)
-
     override fun createData(): BlockData {
         return all.random()
     }
+
+    override fun getItems(): List<BlockData> = all
 }

@@ -15,6 +15,7 @@ subprojects {
         maven("https://hub.spigotmc.org/nexus/content/groups/public/")
         maven("https://oss.sonatype.org/content/repositories/snapshots")
         maven("https://oss.sonatype.org/content/groups/central")
+        maven("https://repo.mattstudios.me/artifactory/public/")
     }
 
     dependencies {

@@ -17,8 +17,8 @@ fun BlockPattern.toWEPattern(): Pattern = when (this) {
     is RandomBlockPattern -> {
         val random = RandomPattern()
         val total = all.size
-        all.forEach { data ->
-            val proportion = total / all.count { it == data }.toDouble()
+        all.toSet().forEach { data ->
+            val proportion = all.count { it == data }.toDouble() / total
             random.add(data.toWEPattern(), proportion)
         }
         random

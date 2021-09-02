@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 import me.bristermitten.mittenmines.MittenMines
 import me.bristermitten.mittenmines.block.RandomBlockPattern
 import me.bristermitten.mittenmines.compat.BlockDataFactory
-import me.bristermitten.mittenmines.compat.BlockPlacer
 import me.bristermitten.mittenmines.compat.RegionSelection
 import me.bristermitten.mittenmines.entity.WorldBlockPoint
 import me.bristermitten.mittenmines.entity.toAngledWorldPoint
@@ -16,6 +15,7 @@ import me.bristermitten.mittenmines.entity.toWorldBlockPoint
 import me.bristermitten.mittenmines.lang.LangConfig
 import me.bristermitten.mittenmines.lang.LangElement
 import me.bristermitten.mittenmines.lang.LangService
+import me.bristermitten.mittenmines.menu.BlocksMenu
 import me.bristermitten.mittenmines.mine.Mine
 import me.bristermitten.mittenmines.mine.MineManager
 import me.bristermitten.mittenmines.mine.ServerOwner
@@ -36,13 +36,13 @@ import kotlin.reflect.KMutableProperty1
 @CommandAlias(COMMAND_NAMES)
 class MinesCommand @Inject constructor(
     private val regionSelection: RegionSelection,
-    private val blockPlacer: BlockPlacer,
     private val blockDataFactory: BlockDataFactory,
     private val minesPlayerStorage: MinesPlayerStorage,
     private val langService: LangService,
     private val mineStorage: MineStorage,
     override val plugin: MittenMines,
     private val mineManager: MineManager,
+    private val blocksMenu: BlocksMenu,
 ) : BaseCommand(), HasPlugin {
 
     @Subcommand("create")
@@ -65,7 +65,7 @@ class MinesCommand @Inject constructor(
             player.location.toAngledWorldPoint(),
             pattern)
 
-        blockPlacer.setRegion(pattern, mine.region)
+        mineManager.fill(mine)
         player.teleport(mine.spawnLocation.toLocation())
         async.launch {
             mineStorage.save(mine)
@@ -75,8 +75,17 @@ class MinesCommand @Inject constructor(
     @Subcommand("reset")
     @CommandPermission("mittenmines.reset")
     fun reset(sender: CommandSender, mine: Mine) {
-        blockPlacer.setRegion(mine.pattern, mine.region)
+        mineManager.fill(mine)
     }
+
+
+    @Subcommand("menu")
+    @CommandPermission("mittenmines.menu")
+    fun menu(sender: Player, mine: Mine) {
+        blocksMenu.create(mine)
+            .open(sender)
+    }
+
 
     @Subcommand("rename")
     @CommandPermission("mittenmines.rename")

@@ -2,7 +2,6 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
-    maven("https://repo.mattstudios.me/artifactory/public/")
 }
 dependencies {
     // Plugin dependencies
