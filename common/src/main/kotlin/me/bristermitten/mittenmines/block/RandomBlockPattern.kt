@@ -20,7 +20,7 @@ class RandomBlockPattern(weights: Map<BlockData, Int>) : BlockPattern {
         return reducedWeights.flatMap { (key, value) -> List(value) { key } }
     }
 
-    private val all = generateAll(weights)
+    val all = generateAll(weights)
 
     override fun createData(): BlockData {
         return all.random()
