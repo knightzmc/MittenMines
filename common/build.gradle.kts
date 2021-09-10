@@ -1,7 +1,3 @@
-plugins {
-    kotlin("plugin.serialization") version "1.5.30"
-}
-
 repositories {
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven("https://papermc.io/repo/repository/maven-public/")

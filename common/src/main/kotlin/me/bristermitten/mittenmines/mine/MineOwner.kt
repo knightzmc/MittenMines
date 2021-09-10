@@ -1,26 +1,14 @@
 package me.bristermitten.mittenmines.mine
 
-import com.google.gson.TypeAdapter
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonWriter
+import kotlinx.serialization.Serializable
+import me.bristermitten.mittenmines.serialization.kotlinx.UUIDSerializer
 import java.util.*
 
+@Serializable
 sealed class MineOwner
-data class PlayerOwner(val uuid: UUID) : MineOwner()
+
+@Serializable
+data class PlayerOwner(@Serializable(with = UUIDSerializer::class) val uuid: UUID) : MineOwner()
+
+@Serializable
 object ServerOwner : MineOwner()
-
-object MineOwnerTypeAdapter : TypeAdapter<MineOwner>() {
-    override fun write(out: JsonWriter, value: MineOwner) {
-        when (value) {
-            is ServerOwner -> out.value("server")
-            is PlayerOwner -> out.value(value.uuid.toString())
-        }
-    }
-
-    override fun read(`in`: JsonReader): MineOwner {
-        return when (val name = `in`.nextString()) {
-            "server" -> ServerOwner
-            else -> PlayerOwner(UUID.fromString(name))
-        }
-    }
-}

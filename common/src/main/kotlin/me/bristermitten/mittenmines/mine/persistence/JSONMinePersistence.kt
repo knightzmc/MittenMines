@@ -20,7 +20,7 @@ class JSONMinePersistence @Inject constructor(private val json: Json, plugin: Pl
     override suspend fun save(value: Mine) = withContext(Dispatchers.IO) {
         val all = loadAll().toMutableSet()
         all.add(value)
-        saveAll(all)
+        saveAll(all.toList()) // ktx doesnt like sets for some reason??
     }
 
     override suspend fun load(id: UUID): Mine? = withContext(Dispatchers.IO) {

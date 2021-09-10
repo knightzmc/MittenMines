@@ -1,9 +1,11 @@
 package me.bristermitten.mittenmines.entity
 
+import kotlinx.serialization.Serializable
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
 
+@Serializable
 data class BlockPoint(
     val x: Int,
     val y: Int,
@@ -13,7 +15,7 @@ data class BlockPoint(
 
     fun withWorld(world: String) = WorldPoint(world, x.toDouble(), y.toDouble(), z.toDouble())
 }
-
+@Serializable
 data class Point(
     val x: Double,
     val y: Double,
@@ -21,7 +23,7 @@ data class Point(
 ) {
     fun toLocation(world: World) = Location(world, x, y, z)
 }
-
+@Serializable
 data class WorldPoint(
     val world: String,
     val x: Double,
@@ -31,7 +33,7 @@ data class WorldPoint(
     fun toLocation() = Bukkit.getWorld(world)?.let { world -> Location(world, x, y, z) }
     fun toBlockPoint() = BlockPoint(x.toInt(), y.toInt(), z.toInt())
 }
-
+@Serializable
 data class WorldBlockPoint(
     val world: String,
     val x: Int,
@@ -41,7 +43,7 @@ data class WorldBlockPoint(
     fun toLocation() = Bukkit.getWorld(world)?.let { world -> Location(world, x.toDouble(), y.toDouble(), z.toDouble()) }
     fun toBlockPoint() = BlockPoint(x, y, z)
 }
-
+@Serializable
 data class AngledWorldPoint(
     val world: String,
     val x: Double,

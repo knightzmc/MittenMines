@@ -1,7 +1,9 @@
 package me.bristermitten.mittenmines.entity
 
+import kotlinx.serialization.Serializable
 import me.bristermitten.mittenmines.util.minMax
 
+@Serializable
 data class Region private constructor(
     val world: String,
     val min: BlockPoint,

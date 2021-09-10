@@ -2,10 +2,12 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin
 
 plugins {
     kotlin("jvm") version "1.5.30"
+    kotlin("plugin.serialization") version "1.5.30"
 }
 
 subprojects {
     apply<KotlinPlatformJvmPlugin>()
+    apply<org.jetbrains.kotlinx.serialization.gradle.SerializationGradleSubplugin>()
 
     group = "me.bristermitten.mittenmines"
     version = "1.0-SNAPSHOT"
