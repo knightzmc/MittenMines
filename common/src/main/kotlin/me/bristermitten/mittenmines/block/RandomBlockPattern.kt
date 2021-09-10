@@ -1,7 +1,9 @@
 package me.bristermitten.mittenmines.block
 
+import kotlinx.serialization.Serializable
 import me.bristermitten.mittenmines.util.minMax
 
+@Serializable
 class RandomBlockPattern : BlockPattern {
 
     val all: List<BlockData>

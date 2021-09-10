@@ -1,9 +1,12 @@
 package me.bristermitten.mittenmines.block
 
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-data class BlockData(val type: Material, val data: Byte? = null, val bukkitData: Any? = null) {
+@Serializable
+data class BlockData(val type: Material, val data: Byte? = null, @Contextual val bukkitData: Any? = null) {
     fun toItemStack(): ItemStack {
         return ItemStack(type, 1, data?.toShort() ?: 0)
     }
