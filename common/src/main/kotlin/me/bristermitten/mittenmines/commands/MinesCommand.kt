@@ -56,7 +56,7 @@ class MinesCommand @Inject constructor(
         }
 
         val pattern = ConstantBlockPattern(blockDataFactory.createBlockData(Material.STONE))
-        
+
         val mine = Mine(UUID.randomUUID(),
             ServerOwner,
             name,
@@ -87,14 +87,13 @@ class MinesCommand @Inject constructor(
 
     @Subcommand("delete")
     @CommandPermission("mittenmines.delete")
-    fun delete(sender: CommandSender, mine: Mine) {
-        async.launch {
-            mineManager.delete(mine)
-            withContext(syncDispatcher) {
-                langService.send(sender, mapOf("{mine}" to (mine.name ?: mine.id))) { it.commands.mineDeleted }
-            }
+    fun delete(sender: CommandSender, mine: Mine) = async.launch {
+        mineManager.delete(mine)
+        withContext(syncDispatcher) {
+            langService.send(sender, mapOf("{mine}" to (mine.name ?: mine.id))) { it.commands.mineDeleted }
         }
     }
+
 
     @Subcommand("rename")
     @CommandPermission("mittenmines.rename")
