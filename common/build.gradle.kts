@@ -14,7 +14,7 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.10.10")
 
     // Libraries
-    implementation("net.kyori:adventure-api:4.8.1")
+    implementation("net.kyori:adventure-api:4.9.0")
     implementation("net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT")
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
 

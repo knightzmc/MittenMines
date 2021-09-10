@@ -22,16 +22,16 @@ subprojects {
         // Core dependencies
         compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
         implementation(kotlin("stdlib"))
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
 
         // Libraries
         implementation("com.google.inject:guice:5.0.1")
         implementation("dev.misfitlabs.kotlinguice4:kotlin-guice:1.5.0")
 
         // Testing
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
         testImplementation("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
     }
 
     tasks {
