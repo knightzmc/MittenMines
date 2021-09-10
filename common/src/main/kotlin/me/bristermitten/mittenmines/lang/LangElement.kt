@@ -1,5 +1,6 @@
 package me.bristermitten.mittenmines.lang
 
+import kotlinx.serialization.Serializable
 import org.bukkit.Sound
 
 data class LangElement(
@@ -7,12 +8,12 @@ data class LangElement(
     val title: String?,
     val subtitle: String?,
     val actionBar: String?,
-    val sound: SoundConfig?
+    val sound: SoundConfig?,
 ) {
     data class SoundConfig(
         val type: Sound,
         val volume: Float,
-        val pitch: Float
+        val pitch: Float,
     )
 }
 

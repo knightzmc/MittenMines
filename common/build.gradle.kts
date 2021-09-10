@@ -1,9 +1,15 @@
+plugins {
+    kotlin("plugin.serialization") version "1.5.30"
+}
+
 repositories {
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
 }
 dependencies {
+
+
     // Plugin dependencies
     compileOnly("me.clip:placeholderapi:2.10.10")
 
@@ -15,4 +21,6 @@ dependencies {
     implementation("dev.triumphteam:triumph-gui:3.0.3")
 
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 }

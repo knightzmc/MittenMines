@@ -3,6 +3,7 @@ package me.bristermitten.mittenmines.block
 import com.google.gson.TypeAdapterFactory
 import com.google.inject.multibindings.Multibinder
 import dev.misfitlabs.kotlinguice4.KotlinModule
+import kotlinx.serialization.modules.SerializersModule
 import me.bristermitten.mittenmines.module.MinesModule
 
 object BlockModule : MinesModule, KotlinModule() {
@@ -10,7 +11,7 @@ object BlockModule : MinesModule, KotlinModule() {
     override val guiceModule = this
 
     override fun configure() {
-        Multibinder.newSetBinder(binder(), TypeAdapterFactory::class.java)
-            .addBinding().toProvider(BlockPatternTypeAdapter::class.java)
+        Multibinder.newSetBinder(binder(), SerializersModule::class.java)
+            .addBinding().toProvider(BlockPatternSerializers::class.java)
     }
 }
