@@ -37,6 +37,7 @@ subprojects {
     tasks {
         compileKotlin {
             kotlinOptions.javaParameters = true
+            kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
         }
         test {
             useJUnitPlatform()
