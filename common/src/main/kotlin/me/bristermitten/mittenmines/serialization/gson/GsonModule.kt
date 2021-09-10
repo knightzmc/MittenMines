@@ -13,8 +13,5 @@ object GsonModule : MinesModule, KotlinModule() {
 
     override fun configure() {
         bind<Gson>().toProvider<GsonProvider>()
-
-        Multibinder.newSetBinder(binder(), TypeAdapterFactory::class.java)
-            .addBinding()
     }
 }
