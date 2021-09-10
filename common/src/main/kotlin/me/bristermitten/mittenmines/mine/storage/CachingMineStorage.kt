@@ -42,7 +42,7 @@ class CachingMineStorage @Inject constructor(private val minePersistence: MinePe
     }
 
     override suspend fun saveAll() {
-        minePersistence.saveAll(cache.asMap().values)
+        minePersistence.saveAll(cache.asMap().values.toList())
     }
 
     override suspend fun delete(mine: UUID) {
