@@ -1,25 +1,25 @@
 package me.bristermitten.mittenmines.mine.permission
 
+import kotlinx.serialization.Serializable
 import java.util.*
 
-sealed interface MinePublicity {
-    fun canEnter(uuid: UUID): Boolean
+@Serializable
+sealed class MinePublicity {
+    abstract fun canEnter(uuid: UUID): Boolean
 }
 
-object OpenPublicity : MinePublicity {
+object OpenPublicity : MinePublicity() {
     override fun canEnter(uuid: UUID) = true
 }
 
-object ClosedPublicity : MinePublicity {
+object ClosedPublicity : MinePublicity() {
     override fun canEnter(uuid: UUID) = false
 }
 
-@JvmInline
-value class WhitelistPublicity(private val allowed: Set<UUID>) : MinePublicity {
+data class WhitelistPublicity(val allowed: Set<UUID>) : MinePublicity() {
     override fun canEnter(uuid: UUID) = uuid in allowed
 }
 
-@JvmInline
-value class BlacklistPublicity(private val disallowed: Set<UUID>) : MinePublicity {
+data class BlacklistPublicity(val disallowed: Set<UUID>) : MinePublicity() {
     override fun canEnter(uuid: UUID) = uuid !in disallowed
 }

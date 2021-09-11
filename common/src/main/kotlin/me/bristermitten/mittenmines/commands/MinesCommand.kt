@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand
 import co.aikar.commands.annotation.CommandAlias
 import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Subcommand
+import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.bristermitten.mittenmines.MittenMines
@@ -20,6 +21,10 @@ import me.bristermitten.mittenmines.menu.BlocksMenu
 import me.bristermitten.mittenmines.mine.Mine
 import me.bristermitten.mittenmines.mine.MineManager
 import me.bristermitten.mittenmines.mine.ServerOwner
+import me.bristermitten.mittenmines.mine.permission.BlacklistPublicity
+import me.bristermitten.mittenmines.mine.permission.ClosedPublicity
+import me.bristermitten.mittenmines.mine.permission.OpenPublicity
+import me.bristermitten.mittenmines.mine.permission.WhitelistPublicity
 import me.bristermitten.mittenmines.mine.storage.MineStorage
 import me.bristermitten.mittenmines.player.MinesPlayer
 import me.bristermitten.mittenmines.player.MinesPlayerStorage
@@ -150,5 +155,39 @@ class MinesCommand @Inject constructor(
             MinesPlayer::selection1,
             { it.commands.pos1Reset },
             { it.commands.pos2Set })
+    }
+
+    @Subcommand("open")
+    fun open(sender: CommandSender, mine: Mine) {
+        mine.options.publicity = OpenPublicity
+    }
+
+    @Subcommand("close")
+    fun close(sender: CommandSender, mine: Mine) {
+        mine.options.publicity = ClosedPublicity
+    }
+
+    @Subcommand("whitelist add")
+    fun whitelist(sender: CommandSender, mine: Mine, target: OnlinePlayer) {
+        val whitelist = mine.options.publicity as? WhitelistPublicity ?: WhitelistPublicity(emptySet())
+        mine.options.publicity = WhitelistPublicity(whitelist.allowed + target.player.uniqueId)
+    }
+
+    @Subcommand("whitelist remove")
+    fun whitelistRemove(sender: CommandSender, mine: Mine, target: OnlinePlayer) {
+        val whitelist = mine.options.publicity as? WhitelistPublicity ?: WhitelistPublicity(emptySet())
+        mine.options.publicity = WhitelistPublicity(whitelist.allowed - target.player.uniqueId)
+    }
+
+    @Subcommand("blacklist add")
+    fun blacklist(sender: CommandSender, mine: Mine, target: OnlinePlayer) {
+        val blacklist = mine.options.publicity as? BlacklistPublicity ?: BlacklistPublicity(emptySet())
+        mine.options.publicity = BlacklistPublicity(blacklist.disallowed + target.player.uniqueId)
+    }
+
+    @Subcommand("blacklist remove")
+    fun blacklistRemove(sender: CommandSender, mine: Mine, target: OnlinePlayer) {
+        val blacklist = mine.options.publicity as? BlacklistPublicity ?: BlacklistPublicity(emptySet())
+        mine.options.publicity = BlacklistPublicity(blacklist.disallowed - target.player.uniqueId)
     }
 }
