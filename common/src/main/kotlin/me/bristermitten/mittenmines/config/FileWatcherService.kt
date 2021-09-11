@@ -54,7 +54,7 @@ class FileWatcherService : Runnable {
         val key = watchService.take()
         val at = key.watchable() as Path
         for (pollEvent in key.pollEvents()) {
-            if (pollEvent.kind() !== StandardWatchEventKinds.ENTRY_MODIFY) {
+            if (pollEvent.kind() != StandardWatchEventKinds.ENTRY_MODIFY && pollEvent.kind() != StandardWatchEventKinds.ENTRY_DELETE) {
                 continue
             }
             val fileWatchers = watchers[at.resolve(pollEvent.context() as Path)]
