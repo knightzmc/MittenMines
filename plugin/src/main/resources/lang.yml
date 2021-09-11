@@ -1,4 +1,4 @@
-prefix: '<gray>[<rainbow>MittenMines</rainbow><light_purple>]</gray> '
+prefix: '<gray>[<rainbow>MittenMines</rainbow>]</gray> '
 commands:
   pos1-reset: '<yellow>Your 1st Mine point was deselected because it was in a different world'
   pos1-set: '<green>Set 1st Mine point to {x}, {y}, {z}'
