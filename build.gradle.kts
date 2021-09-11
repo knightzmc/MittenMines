@@ -23,7 +23,7 @@ subprojects {
     dependencies {
         // Core dependencies
         compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-        implementation(kotlin("stdlib"))
+        implementation(kotlin("stdlib", "1.5.21"))
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
 
         // Libraries
